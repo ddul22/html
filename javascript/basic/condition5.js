@@ -7,7 +7,7 @@ let num3 = parseInt(Math.random() * 100) + 1;
 console.log(num1)
 console.log(num2)
 console.log(num3)
-let result;
+let result = 0;
 // 세수중에서 제일 큰 값을 출력.
 
 if (num1 > num2) {
@@ -20,7 +20,7 @@ if (num1 > num2) {
   }
 } else if(num3 > num1){
   if(num3 > num2){
-    console.log('dsgs')
+    result = num3;
   }
 }
 console.log(result)
