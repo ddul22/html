@@ -1,6 +1,6 @@
 //whileloop2.js
-stop 을 입력하면 반복문 종료.
-입력한 값중에서 제일 큰 값을 출력.
+// stop 을 입력하면 반복문 종료.
+// 입력한 값중에서 제일 큰 값을 출력.
 let run = true;
 let max = 0;
 while (run) {
