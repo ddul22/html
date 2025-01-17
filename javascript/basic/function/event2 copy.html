@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  년:<input type="number" name="year"> 
+  월:<input type="number" name="month"> <button>달력</button>
+  <div id="show"></div>
+ 
+  <script>
+    // 달력버튼 클릭하면 월정보를 입력받아서 출력.
+     document.querySelector('button').addEventListener('click', function() {
+      let month= document.querySelector('[name="month"]').value;
+      let year= document.querySelector('[name="year"]').value;
+      console.log(month);
+      makeCalender(year,month);
+
+    })
+    
+
+
+    // 월정보를 알려주면 공백 반환.
+    function getDays(month = 1) {
+      if (month == 1) {
+        return 3;
+      } else if (month == 2 || month == 3) {
+        return 6;
+      } else if (month == 4) {
+        return 2;
+      } else if (month == 5) {
+        return 4;
+      }
+    }
+    // 월정보를 알려주면 말일 반환
+    function getLastDate(month = 1) {
+      if (month == 1 || month == 3 || month == 5) {
+        return 31;
+      } else if (month == 2) {
+        return 23;
+      } else {
+        return 30;
+      }
+    } // end of makeCalender()
+    makeCalender(1);
+
+    // 달력출력함수.
+    function makeCalender(year=2025,month = 1) {
+      let now = new Date();
+      now.setFullYear(year);
+      now.setMonth(month -1);
+      now.setDate(1);
+      console.log(now.getDay());
+      let spaces = now.getDay();
+      now.setFullYear(year);
+      now.setMonth(month);
+      now.setDate(0);
+      console.log(now.getDate())
+      let lastDate = now.getDate();
+      
+
+      // let spaces = getDays(4); //1일의위치(공백). 계산.
+      // let lastDate = getLastDate(4); //월의 말일 계산.
+
+      let days = ['일', '월', '화', '수', '목', '금', '토'];
+      // html 작성하는 부분 시작.
+      let html = '';
+      html += '<table border="1">';
+      html += `<caption>${month}월</caption>`;
+      html += '<thead><tr>';
+      //요일출력.
+      for (let day of days) {
+        html += `<th>${day}</th>`;
+      }
+      html += '</tr></thead>';
+      html += '<tbody id = "list"><tr>';
+      //공백
+      for (let i = 0; i < spaces; i++) {
+        html += '<td></td>';
+      }
+
+      for (let i = 1; i <= lastDate; i++) {
+        if ((i + spaces) % 7 == 0) {
+          html += `<td style="background-color: blue;">${i}</td>`;
+        } else if ((i + spaces) % 7 == 1) {
+          html += `<td style="background-color: red;">${i}</td>`;
+        } else {
+          html += `<td>${i}</td>`;
+        }
+
+        if ((i + spaces) % 7 == 0) {
+          html += '</tr><tr>';
+        }
+      }
+
+      html += '</tr></tbody>';
+      html += '</table>';
+      document.querySelector('#show').innerHTML = html;
+    }
+  </script>
+</body>
+
+</html>

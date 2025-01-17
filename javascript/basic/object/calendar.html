@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calendar.html</title>
+</head>
+
+<body>
+  년도:<input type="number" name="year">
+  월:<input type="number" name="month"> 
+
+  <button>달력</button>
+  <div id="show"></div>
+  <!-- <table border="1">
+  <thead>
+    <tbody id="List">
+    <tr>
+      <th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+      <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+  <table> -->
+  <script>
+    let holydays =[{
+      month: 1,
+      days: [1, 2, 3]
+    }, {
+      month: 2,
+      days:[5, 8, 12]
+    }, {
+      month: 3,
+      days: [1, 10, 15]
+    }]
+
+
+    // 달력버튼 클릭하면 월정보를 입력받아서 출력.
+     document.querySelector('button').addEventListener('click', function() {
+      let month= document.querySelector('[name="month"]').value;
+      let year= document.querySelector('[name="year"]').value;
+      console.log(month);
+      makeCalender(year,month);
+    })
+    
+    // 달력출력함수.
+    function makeCalender(year = 2025, month =1) {
+      let now = new Date(); // 2025, 1,17
+      // 년도, 월 지정.
+      now.setFullYear(year);
+      now.setMonth(month - 1);
+      now.setDate(1);
+      let spaces = now.getDay(); //1일의위치(공백). 계산.
+
+      now.setMonth(month);
+      now.setDate(0);
+      let lastDate = now.getDate(); //월의 말일 계산.
+
+      let days = ['일', '월', '화', '수', '목', '금', '토'];
+      // html 작성하는 부분 시작.
+      let html = '';
+      html += '<table border="1">';
+      html += `<caption>${year}년 ${month}월</caption>`;
+      html += '<thead><tr>';
+      //요일출력.
+      for (let day of days) {
+        html += `<th>${day}</th>`;
+      }
+      html += '</tr></thead>';
+      html += '<tbody id = "list"><tr>';
+      //공백
+      for (let i = 0; i < spaces; i++) {
+        html += '<td></td>';
+      }
+
+      for (let i = 1; i <= lastDate; i++) {
+        if ((i + spaces) % 7 == 0) {
+          html += `<td style="background-color: blue;">${i}</td>`;
+        } else if ((i + spaces) % 7 == 1) {
+          html += `<td style="background-color: red;">${i}</td>`;
+        } else {
+          html += `<td>${i}</td>`;
+        }
+
+        if ((i + spaces) % 7 == 0) {
+          html += '</tr><tr>';
+        }
+      }
+
+      html += '</tr></tbody>';
+      html += '</table>';
+      document.querySelector('#show').innerHTML = html;
+    }
+  </script>
+</body>
+
+</html>
