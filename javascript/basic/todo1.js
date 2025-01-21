@@ -14,6 +14,7 @@ if(2 < month && month < 7) {
 
 else if(6 < month && month <10) {
   console.log('summer');
+  
 }
 
 else if(8 < month && month < 12) {
