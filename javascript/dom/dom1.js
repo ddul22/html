@@ -44,6 +44,6 @@ function init() {
     document.querySelector('#list').appendChild(tr);//<tbody><tr><td>mid</td><td>mname</td><td>mpoint</td><tr></tbody>
     
 
-
+//12345
   })
 }
