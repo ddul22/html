@@ -14,4 +14,4 @@ let day2 = parseInt(secondValue / (24 * 60));
 let hour2 = parseInt((secondValue - day2 * 1440) /60);
 console.log( secondValue + "분은 "+day2+"일 "+hour2+  "시간"+secondValue%60+"분입니다");
 
-//1234123444512312312
+//12341234445123123125
